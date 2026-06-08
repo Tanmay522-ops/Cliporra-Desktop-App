@@ -14,7 +14,7 @@ export const useStudioSettings = (
 ) => {
     const [onPreset, setPreset] = useState<'HD' | 'SD' | undefined>()
 
-    const { register, watch } = useZodForm(updateStudioSettingsSchema, {
+    const { register, watch, } = useZodForm(updateStudioSettingsSchema, {
         screen: screen!,
         audio: audio!,
         preset: preset!,

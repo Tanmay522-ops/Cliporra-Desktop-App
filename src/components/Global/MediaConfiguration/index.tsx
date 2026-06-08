@@ -1,5 +1,7 @@
 import { SourceDeviceStateProps } from '@/hooks/useMediaSources'
 import { useStudioSettings } from '@/hooks/useStudioSettings'
+import { Loader } from '../Loader'
+import { Headphones, Monitor, Settings2 } from 'lucide-react'
 
 type Props = {
     state: SourceDeviceStateProps
@@ -45,7 +47,99 @@ const MediaConfiguration = ({ state, user }: Props) => {
     )
 
     return (
-        <form className="flex h-full relative w-full flex-col gap-y-5">{ }</form>
+        <form className="flex h-full relative w-full flex-col gap-y-5">
+            <div className="flex gap-x-5 justify-center items-center w-full px-4">
+                <Monitor
+                    fill="#575655"
+                    color="#575655"
+                    size={36}
+                />
+                <div className="relative w-full">
+                    <select
+                        {...register('screen')}
+                        className="w-full appearance-none outline-none cursor-pointer pl-3 pr-8 py-2 rounded-md border border-neutral-700 bg-transparent text-white text-sm focus:border-neutral-500 transition-colors"
+                    >
+                        {state.displays?.map((display, key) => (
+                            <option
+                                key={key}
+                                value={display.id}
+                                className="bg-[#171717] cursor-pointer"
+                            >
+                                {display.name.length > 20
+                                    ? `${display.name.substring(0, 20)}...`
+                                    : display.name}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div className="flex gap-x-5 justify-center items-center w-full px-4">
+                <Headphones
+                    color="#575655"
+                    size={36}
+                />
+                <div className="relative w-full">
+                    <select
+                        {...register('audio')}
+                        className="w-full appearance-none outline-none cursor-pointer pl-3 pr-8 py-2 rounded-md border border-neutral-700 bg-transparent text-white text-sm focus:border-neutral-500 transition-colors"
+                    >
+                        {state.audioInputs?.map((device, key) => (
+                            <option
+                                key={key}
+                                value={device.deviceId}
+                                className="bg-[#171717] cursor-pointer"
+                            >
+                                {device.label.length > 20
+                                    ? `${device.label.substring(0, 20)}...`
+                                    : device.label}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div> 
+            <div className="flex gap-x-5 justify-center items-center w-full px-4">
+                <Settings2
+                    color="#575655"
+                    size={36}
+                />
+                <div className="relative w-full">
+                    <select
+                        {...register('preset')}
+                        className="w-full appearance-none outline-none cursor-pointer pl-3 pr-8 py-2 rounded-md border border-neutral-700 bg-transparent text-white text-sm focus:border-neutral-500 transition-colors"
+                    >
+                        <option
+                            disabled={user?.subscription?.plan === 'FREE'}
+                            value={'HD'}
+                            className="bg-[#171717] cursor-pointer"
+                        >
+                            1080p{' '}
+                            {user?.subscription?.plan === 'FREE' && '(Upgrade to PRO plan)'}
+                        </option>
+                        <option
+                            value={'SD'}
+                            className="bg-[#171717] cursor-pointer"
+                        >
+                            720p
+                        </option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </form>
     )
 }
 
