@@ -1,7 +1,9 @@
+import StudioTray from "./components/Global/StudioTray"
+
 function App() {
 
     return (
-        <h1> Studio Component</h1>
+       <StudioTray/>
     )
 }
 
