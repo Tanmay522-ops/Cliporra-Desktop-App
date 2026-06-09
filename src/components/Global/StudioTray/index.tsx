@@ -59,12 +59,14 @@ const StudioTray = () => {
         <></>
     ) : (
         <div className="flex flex-col justify-end gap-y-5 h-screen">
-            <video
-                autoPlay
-                ref={videoElement}
-                className={cn('w-6/12 border-2 self-end', preview ? 'hidden' : '')}
-            />
-            <div className="rounded-full flex justify-around items-center h-20 w-full border-2 bg-[#171717] draggable border-white/40">
+            {preview && (
+                    <video
+                        autoPlay
+                        ref={videoElement}
+                        className={cn('w-6/12 border-2 self-end bg-white')}
+                    ></video>
+            )}
+            <div className="rounded-full flex justify-around items-center h-16 w-full border-2 bg-[#171717] draggable border-white/40">
                 <div
                     {...(onSources && {
                         onClick: () => {
@@ -88,13 +90,13 @@ const StudioTray = () => {
                     {!recording ? (
                         <Pause
                             className="non-draggable opacity-50"
-                            size={32}
+                            size={30}
                             fill="white"
                             stroke="none"
                         />
                     ) : (
                         <Square
-                            size={32}
+                            size={30}
                             className="non-draggable cursor-pointer hover:scale-110 transform transition duration-150"
                             fill="white"
                             onClick={() => {
@@ -108,7 +110,7 @@ const StudioTray = () => {
 
                     <Cast
                         onClick={() => setPreview((prev) => !prev)}
-                        size={32}
+                        size={30}
                         fill="white"
                         className="non-draggable cursor-pointer hover:opacity-60"
                         stroke="white"

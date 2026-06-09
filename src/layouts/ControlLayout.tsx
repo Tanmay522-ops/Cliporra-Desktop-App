@@ -41,12 +41,12 @@ const ControlLayout = ({ children, className }: Props) => {
             <div className="p-5 flex w-full">
                 <div className='flex items-center gap-x-2'>
                     <img
-                        height={25}
-                        width={25}
+                        height={15}
+                        width={15}
                         src="/cliporra.svg"
                         alt="app logo"
                     />
-                    <p className="text-white text-2xl">Cliporra</p>
+                    <p className="text-white text-xl">Cliporra</p>
                 </div>
             </div>
         </div>
