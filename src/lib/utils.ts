@@ -10,11 +10,10 @@ const httpClient = axios.create({
   baseURL:import.meta.env.VITE_HOST_URL
 })
 
+// when user click on closeApp we are firing an IPCRender name as closeApp then inside our main.tsx file
+//  when we start our entire application we are going to setup the listener for this event
+// we are sending something from here so probably we are listening it from  somewhere else in the file 
 export const onCloseApp = () =>  window.ipcRenderer.send('closeApp')
-
-
-
-
 
 export const fetchUserProfile = async(clerkId:string)=>{
 
@@ -31,8 +30,7 @@ export const fetchUserProfile = async(clerkId:string)=>{
 
 export const getMediaSources = async () => {
   const displays = await window.ipcRenderer.invoke('getSources')
-  const enumerateDevices =
-    await window.navigator.mediaDevices.enumerateDevices()
+  const enumerateDevices = await window.navigator.mediaDevices.enumerateDevices()
   const audioIputs = enumerateDevices.filter(
     (device) => device.kind === 'audioinput'
   )
@@ -84,4 +82,9 @@ export const videoRecordingTime = (ms: number) => {
     .padStart(2, '0')
 
   return { length: `${hour}:${minute}:${second}`, minute }
+}
+
+
+export const resizeWindow = (shrink: boolean) => {
+  window.ipcRenderer.send('resize-studio', { shrink })
 }

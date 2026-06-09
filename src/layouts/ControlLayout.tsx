@@ -37,7 +37,8 @@ const ControlLayout = ({ children, className }: Props) => {
 
             <div className="flex-1 h-0 overflow-auto">
                {children}
-                </div>
+            </div>
+            
             <div className="p-5 flex w-full">
                 <div className='flex items-center gap-x-2'>
                     <img

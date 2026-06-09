@@ -36,7 +36,7 @@ const Widget = () => {
     const {state,fetchMediaResources} = useMediaSources()
 
     useEffect(() => {
-        fetchMediaResources() // 👈 call it to populate displays
+        fetchMediaResources() 
     }, [])
 
     useEffect(() => {

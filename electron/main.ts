@@ -35,7 +35,6 @@ function createWindow() {
     maxWidth: 380,  // 👈 add this
     frame: false,
     transparent: true,
-
     alwaysOnTop: true,
     focusable: false,
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
@@ -155,7 +154,7 @@ ipcMain.handle('getSources', async () => {
 
 ipcMain.on('media-sources', (event, payload) => {
   console.log(event)
-  studio?.webContents.send('profile-received', payload)  // fix typo: recieved → received
+  studio?.webContents.send('profile-received', payload)  
 })
 
 ipcMain.on('resize-studio', (event, payload) => {

@@ -1,5 +1,4 @@
 import { getMediaSources } from "@/lib/utils"
-import { error } from "node:console"
 import { useReducer } from "react"
 
 export type SourceDeviceStateProps = {

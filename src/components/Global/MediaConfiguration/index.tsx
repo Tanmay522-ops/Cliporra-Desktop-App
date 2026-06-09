@@ -48,6 +48,11 @@ const MediaConfiguration = ({ state, user }: Props) => {
 
     return (
         <form className="flex h-full relative w-full flex-col gap-y-5">
+            {isPending && (
+                <div className="fixed z-50 w-full top-0 left-0 right-0 bottom-0 rounded-2xl h-full bg-black/80 flex justify-center items-center">
+                    <Loader />
+                </div>
+            )}
             <div className="flex gap-x-5 justify-center items-center w-full px-4">
                 <Monitor
                     fill="#575655"
@@ -61,6 +66,7 @@ const MediaConfiguration = ({ state, user }: Props) => {
                     >
                         {state.displays?.map((display, key) => (
                             <option
+                                selected={activeScreen && activeScreen.id === display.id}
                                 key={key}
                                 value={display.id}
                                 className="bg-[#171717] cursor-pointer"
@@ -90,6 +96,7 @@ const MediaConfiguration = ({ state, user }: Props) => {
                     >
                         {state.audioInputs?.map((device, key) => (
                             <option
+                                selected={activeAudio && activeAudio.deviceId === device.deviceId}
                                 key={key}
                                 value={device.deviceId}
                                 className="bg-[#171717] cursor-pointer"
@@ -119,6 +126,7 @@ const MediaConfiguration = ({ state, user }: Props) => {
                     >
                         <option
                             disabled={user?.subscription?.plan === 'FREE'}
+                            selected={onPreset === "HD" || user?.studio?.preset === 'HD'}
                             value={'HD'}
                             className="bg-[#171717] cursor-pointer"
                         >
@@ -127,6 +135,7 @@ const MediaConfiguration = ({ state, user }: Props) => {
                         </option>
                         <option
                             value={'SD'}
+                            selected={onPreset === "SD" || user?.studio?.preset === 'SD'}
                             className="bg-[#171717] cursor-pointer"
                         >
                             720p
