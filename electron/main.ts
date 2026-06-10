@@ -2,6 +2,7 @@ import { app, BrowserWindow, desktopCapturer, ipcMain } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // The built directory structure
@@ -92,6 +93,8 @@ function createWindow() {
   win.setAlwaysOnTop(true, 'screen-saver', 1)
   studio.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
   studio.setAlwaysOnTop(true, 'screen-saver', 1)
+  floatingWebCam.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
+  floatingWebCam.setAlwaysOnTop(true, 'screen-saver', 1)
 
 
   // Test active push message to Renderer-process.

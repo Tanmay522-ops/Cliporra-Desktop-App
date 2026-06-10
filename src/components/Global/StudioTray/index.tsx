@@ -34,14 +34,14 @@ const StudioTray = () => {
     const videoElement = useRef<HTMLVideoElement | null>(null)
 
 
-
-
     useEffect(() => {
-        if (onSources && onSources.screen) selectSources(onSources, videoElement)
+        if (onSources && onSources.screen && preview) {
+            selectSources(onSources, videoElement)
+        }
         return () => {
             selectSources(onSources!, videoElement)
         }
-    }, [onSources])
+    }, [onSources, preview]) // 👈 add preview here
 
     useEffect(() => {
         if (!recording) return
@@ -77,23 +77,23 @@ const StudioTray = () => {
                     ></video>
             )}
             <div className="rounded-full flex justify-around items-center h-16 w-full border-2 bg-[#171717] draggable border-white/40">
-                <div
-                    {...(onSources && {
-                        onClick: () => {
-                            setRecording(true)
-                            StartRecording(onSources)
-                        },
-                    })}
-                        className={cn(
-                            'non-draggable rounded-full cursor-pointer relative hover:opacity-80',
-                            recording ? 'bg-red-500 w-6 h-6' : 'bg-red-400 w-8 h-8'
-                        )}
-                >
-                    
+                    <div
+                        {...(onSources && {
+                            onClick: () => {
+                                setRecording(true)
+                                StartRecording(onSources)
+                            },
+                        })}
+                        className="non-draggable flex items-center gap-x-2 cursor-pointer hover:opacity-80"
+                    >
+                        <div
+                            className={cn(
+                                'rounded-full flex-shrink-0',
+                                recording ? 'bg-red-500 w-6 h-6' : 'bg-red-400 w-8 h-8'
+                            )}
+                        />
                         {recording && (
-                            <span className="absolute -right-16 top-1/2 transform -translate-y-1/2 text-white">
-                                {onTimer}
-                            </span>
+                            <span className="text-white text-sm">{onTimer}</span>
                         )}
                     </div>
 
